@@ -1,11 +1,15 @@
 const bgElements = () => {
 
-      const elements = document.querySelectorAll('.set-bg'); //  []
+      const elements = document.querySelectorAll('.set-bg'); //  [ div, div ] - объект(масив и псевдомассив-объекты)
 
-      for(let i = 0; i < elements.length; i++ ){
-            //console.dir(elements[i]);           // выведет элемент ввиде объекта
-            const src = elements[i].dataset.setbg;  // получим значение дата атрибута setbg
-            elements[i].style.backgroundImage = `url(${src})`;
-            //console.dir(elements[i])
-      }
+      elements.forEach((elem, index, array) => { // метод ничего не возвращает
+            const src = elem.dataset.setbg;  // получим значение дата атрибута setbg
+            elem.style.backgroundImage = `url(${src})`;
+      });
+
+
+      
 };
+
+
+bgElements();
