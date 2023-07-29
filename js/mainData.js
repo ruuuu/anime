@@ -1,0 +1,6 @@
+const mainData  = () => {
+
+
+};
+
+mainData();
