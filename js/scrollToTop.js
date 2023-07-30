@@ -1,6 +1,6 @@
 const scrollToTop = () => {
 
-      // плавынй скролл вверх страницы:
+      // плавный скролл вверх страницы:
       const topBtn = document.querySelector('#scrollToTopButton');
 
       topBtn.addEventListener('click', (evt) => {

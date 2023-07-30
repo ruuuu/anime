@@ -1,6 +1,9 @@
 const mainData  = () => {
 
+      const preloader = document.querySelector('.preloder');
 
+
+       // отрисовка пунтков меню в шапке:
       const renderGanreList = (ganres) => {
             const headerMenu = document.querySelector('.header__menu  .dropdown');
             headerMenu.innerHTML = '';
@@ -14,10 +17,10 @@ const mainData  = () => {
       }
 
 
-
+      // отрисовка категорий и спсика фильмов относщяхся к ней:
       const renderAnimeList = (array, ganres) => {                // коллекwия Set() ganres { 'Фэнтези', 'Приключения', 'История' }
             const wrapper = document.querySelector('.product .col-lg-8');
-            //wrapper.innerHTML = '';
+            // wrapper.innerHTML = '';
 
             ganres.forEach((ganre) => {  // перебираем коллекцию ganres = { 'Фэнтези', 'Приключения', 'История' }
                   const productBlock = document.createElement('div');
@@ -81,8 +84,13 @@ const mainData  = () => {
                   wrapper.querySelectorAll('.set-bg').forEach((elem) => { 
                         const src = elem.dataset.setbg;  // получим значение дата атрибута setbg
                         elem.style.backgroundImage = `url(${src})`;
-                  });
+                  });     
             });
+
+            // отклбчаем прелоадер
+            setTimeout(()=> {  // переданная фукнция отработает через 500 мс
+                  preloader.classList.remove('active');
+            },  500);
       }
 
 
@@ -101,8 +109,7 @@ const mainData  = () => {
                               <div class="view"><i class="fa fa-eye"></i> ${item.views}</div>
                               <h5><a href="/anime-details.html">${item.title}</a></h5>
                         </div>
-                  `
-                  )
+                  `)
             });
 
             
@@ -135,8 +142,6 @@ const mainData  = () => {
                   renderAnimeList(data, ganres);
                   renderGanreList(ganres);            // для вывода категорий в меню
             })
-
-
 
 };
 

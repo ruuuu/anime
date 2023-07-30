@@ -1,3 +1,5 @@
+// поле поиска отобраажется рпи нажатии на лупу
+
 const modal = () => {
          
       const modal = document.querySelector('.search-model');
@@ -16,5 +18,7 @@ const modal = () => {
       });
 
 };
+
+
 
 modal();

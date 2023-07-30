@@ -1,5 +1,8 @@
 const categoriesData = () => {
 
+      const preloader = document.querySelector('.preloder');
+
+      // отрисовка пунтков меню в шапке
       const renderGanreList = (ganres) => {
             const headerMenu = document.querySelector('.header__menu  .dropdown');
             headerMenu.innerHTML = '';
@@ -13,7 +16,7 @@ const categoriesData = () => {
       }
 
 
-
+      // отрисовка категорий и спсика фильмов относщячся к ней:
       const renderAnimeList = (array, ganres) => {                // коллекwия Set() ganres { 'Фэнтези', 'Приключения', 'История' }
             const wrapper = document.querySelector('.product-page .col-lg-8');
             // wrapper.innerHTML = '';                // очищаем список перед заполнением
@@ -87,6 +90,13 @@ const categoriesData = () => {
                         elem.style.backgroundImage = `url(${src})`;
                   });
             });
+
+
+
+            // отклбчаем прелоадер
+            setTimeout(()=> {  // переданная фукнция отработает через 500 мс
+                  preloader.classList.remove('active');
+            },  500);
       }
 
 
