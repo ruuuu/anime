@@ -1,5 +1,4 @@
-const mainData  = () => {
-
+const categoriesData = () => {
 
       const renderGanreList = (ganres) => {
             const headerMenu = document.querySelector('.header__menu  .dropdown');
@@ -16,16 +15,21 @@ const mainData  = () => {
 
 
       const renderAnimeList = (array, ganres) => {                // коллекwия Set() ganres { 'Фэнтези', 'Приключения', 'История' }
-            const wrapper = document.querySelector('.product .col-lg-8');
-            //wrapper.innerHTML = '';
+            const wrapper = document.querySelector('.product-page .col-lg-8');
+            // wrapper.innerHTML = '';                // очищаем список перед заполнением
 
-            ganres.forEach((ganre) => {  // перебираем коллекцию ganres = { 'Фэнтези', 'Приключения', 'История' }
+            ganres.forEach((ganre) => {               // перебираем коллекцию ganres = { 'Фэнтези', 'Приключения', 'История' }
                   const productBlock = document.createElement('div');
                   const listBlock = document.createElement('div');
                   listBlock.classList.add('row');
                   
-                  const list = array.filter((item) => {           // получим [ {}, {}, {} ] - фильмы определенного жанра ganre
-                        return (item.ganre === ganre);
+                  // const list = array.filter((item) => {           // получим новый массив [ {}, {}, {} ] - фильмы определенного жанра ganre
+                  //       return (item.ganre === ganre);
+                  // });
+
+
+                  const list = array.filter((item) => {                 // получим новый массив [ {}, {}, {} ] - фильмы определенного жанра ganre
+                        return (item.tags.includes(ganre));             // item.tages = [ 'Фэнтези', 'Приключения' ]
                   });
 
                   productBlock.classList.add('mb-5'); 
@@ -79,7 +83,7 @@ const mainData  = () => {
                   wrapper.append(productBlock);
 
                   wrapper.querySelectorAll('.set-bg').forEach((elem) => { 
-                        const src = elem.dataset.setbg;  // получим значение дата атрибута setbg
+                        const src = elem.dataset.setbg;                             // получим значение дата атрибута setbg
                         elem.style.backgroundImage = `url(${src})`;
                   });
             });
@@ -88,7 +92,6 @@ const mainData  = () => {
 
 
       const renderToAnime = (array) => {
-            console.log('array ', array);
             
             const wrapper = document.querySelector('.filter__gallery');
             wrapper.innerHTML = '';  // очищаем контенейр перед его заполнением
@@ -101,8 +104,7 @@ const mainData  = () => {
                               <div class="view"><i class="fa fa-eye"></i> ${item.views}</div>
                               <h5><a href="/anime-details.html">${item.title}</a></h5>
                         </div>
-                  `
-                  )
+                  `)
             });
 
             
@@ -118,39 +120,38 @@ const mainData  = () => {
       
 
       fetch('https://anime-d6a5d-default-rtdb.firebaseio.com/db.json')                       // отправка запроса,  GET по умолчанию. Неизвестно через какое время придет ответ с сервера
-            .then((response) => {             // этот метод запустится когда получим данные с сервера, response-{}
-                  return response.json();            //  этот метод(асинхронный те рабоатет какое-то время) сработает не сразу(зависит от объема данных) превращает данные с сервера в понятный нам вид
+            .then((response) => {           
+                  return response.json();                   //  этот метод(асинхронный те рабоатет какое-то время) сработает не сразу(зависит от объема данных) превращает данные с сервера в понятный нам вид
             })  
-            .then((data) => {                   // этот метод запутсится когда отработает предыдущий then(), data - обработанные данные
-                  const ganres = new Set();      // создали коллекцию(объект), она хранит уникальные значения 
+            .then((data) => {                               // data = [{},{},{}] - массив фильмов              
+                  const ganres = new Set();                 // создали коллекцию пустую(объект),в цикле ее будем запонять,  она хранит уникальные значения 
+                  // console.log('window.location ', window.location);              // window- глоб объект
+                  // window.location.search                                         // вернет ?genre="строка"
+                  const genreParams = new URLSearchParams(window.location.search).get('ganre');  // в get() передали название query параметра
+                  // console.log('genreParams ', genreParams)
+
 
                   data.forEach((item) => {
-                        ganres.add(item.ganre);  // add() метод коллекции Set(), доабвляет элемент в коллекцию
+                        ganres.add(item.ganre);                   // add() метод коллекции Set(), добавляет элемент в коллекцию
                   });
 
+                  // ganres = { 'История', 'Приключения', 'Фэнтези' }
 
-                  // сортируем и возвращаем первые 5 элементов массива:
-                  // data.sort((a, b) => b.views - a.views).slice(0, 5)
-                  renderToAnime(data.sort((a, b) => b.views - a.views).slice(0, 5));  // сортировка по убыванию, (a.views - b.views сортирует по возрастанию)
-                  renderAnimeList(data, ganres);
+
+                  renderToAnime(data.sort((a, b) => b.views - a.views).slice(0, 5));                  // сортировка по убыванию, (a.views - b.views сортирует по возрастанию) и возвращет первые 5 элементов
+                  
+                  if(genreParams){
+                        renderAnimeList(data, [ genreParams ]);                           // 2-ым параметром передали массив из 1-го элемента
+                  }
+                  else{
+                        renderAnimeList(data, ganres); 
+                  }
+                  
+                  
                   renderGanreList(ganres);            // для вывода категорий в меню
             })
-
-
 
 };
 
 
-
-mainData();
-
-
-
-
-
-
-
-
-
-
-// Метод slice(0, 5) выреззает из исходного массива часть массива. Передаем в метод 1-ый параметр: индекс элемент начиная с котрого будем резать. 2-ый параметр: индекс элемента по котрой закзанчивем резать. САм этот элемент не включается
+categoriesData();

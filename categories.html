@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="js/modal.js" defer></script>
+    <script src="js/preloader.js" defer></script>
+    <script src="js/scrollToTop.js" defer></script>
+    <script src="js/categoriesData.js" defer></script>
+    
 </head>
 
 <body>
@@ -27,7 +32,7 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header Section Begin -->
+  
     <header class="header">
         <div class="container">
             <div class="row">
@@ -49,7 +54,7 @@
                                     </a>
                                     
                                     <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
+                                        <!-- <li><a href="./categories.html">Categories</a></li> -->
                                     </ul>
                                 </li>
                             </ul>
@@ -66,9 +71,9 @@
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>
-    <!-- Header End -->
+   
 
-    <!-- Breadcrumb Begin -->
+   
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -81,14 +86,14 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
+    
 
-    <!-- Product Section Begin -->
+   
     <section class="product-page spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="product__page__content">
+                    <!-- <div class="product__page__content">
                         <div class="product__page__title">
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-6">
@@ -370,7 +375,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="product__sidebar">
@@ -379,7 +384,7 @@
                                 <h5>Top Views</h5>
                             </div>
                             <div class="filter__gallery">
-                                <div class="product__sidebar__view__item set-bg mix day years"
+                                <!-- <div class="product__sidebar__view__item set-bg mix day years"
                                     data-setbg="img/sidebar/tv-1.jpg">
                                     <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
@@ -408,7 +413,7 @@
                                     <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     <h5><a href="#">Fate stay night unlimited blade works</a></h5>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -416,9 +421,9 @@
             </div>
         </div>
     </section>
-    <!-- Product Section End -->
+   
 
-    <!-- Footer Section Begin -->
+   
     <footer class="footer">
         <div class="page-up">
             <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
@@ -441,9 +446,9 @@
                 </div>
             </div>
     </footer>
-    <!-- Footer Section End -->
+   
 
-    <!-- Search model Begin -->
+  
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch"><i class="icon_close"></i></div>
@@ -452,13 +457,15 @@
             </form>
         </div>
     </div>
-    <!-- Search model end -->
+   
 
-    <!-- Js Plugins -->
+   
     <script>
         const params = new URLSearchParams(window.location.search)
         console.log(params.get("ganre"));
     </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/seamless-scroll-polyfill@latest"></script><!-- либа для плавного скролла -->
 </body>
 
 </html>
