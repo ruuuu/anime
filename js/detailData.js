@@ -2,7 +2,7 @@ const detailData = () => {
 
       const preloader = document.querySelector('.preloder');
 
-      // отрисовка пунтков меню в шапке:
+      // отрисовка пунктов меню в шапке:
       const renderGanreList = (ganres) => {
             const headerMenu = document.querySelector('.header__menu  .dropdown');
             headerMenu.innerHTML = '';
@@ -92,8 +92,6 @@ const detailData = () => {
 
                   // ganres = { 'История', 'Приключения', 'Фэнтези' }
 
-
-                  
                   if(genreParams){
                         renderAnimeDetail(data,  genreParams ); // отрисовка карточки фильма                          
                   }
@@ -104,8 +102,6 @@ const detailData = () => {
                   
                   renderGanreList(ganres);            // для вывода категорий в меню
             });
-
-
 };
 
 
