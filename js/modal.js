@@ -1,4 +1,3 @@
-// поле поиска отобраажется рпи нажатии на лупу
 
 const modal = () => {
          
@@ -9,20 +8,25 @@ const modal = () => {
       const wrapper = modal.querySelector('.search-model-result');
 
       wrapper.style.width = '100%';
-      wrapper.style.maxWidth = '500px';   // max-width: 500px
+      wrapper.style.maxWidth = '500px';                     // max-width: 500px
      
 
-      const debounce = (func, ms=300) => {  // принимает функию и ms=300  по дефолту. Эта функwия будет вызываться через 300ms
-           return func;
+      const debounce = (func, ms=300) => {                  // принимает функию и ms=300, ms  по дефолту. Эта функwия будет вызываться через 300ms(чтоыб при каждом вводе символа не отрпавлялся запрос на сервер, а только через 300ms)
+            let timer;
+            
+            return (...args) => {                     // ...args все параметры функции func
+                  clearTimeout(timer);                // очищаем таймер
+                  timer = setTimeout(() => { func.apply(this, args) }, ms);  // переданая фукня вызовется чрез 300ms
+            }  
       };
 
-      const searchDebounce = debounce((searchString) => {  // передаем  то, что ввели в поле поиска. Функция searchFunc(searchString) вызовется через 500ms
+      const searchDebounce = debounce((searchString) => {  // searchString то, что ввели в поле поиска. Функция searchFunc(searchString) вызовется через 500ms
             searchFunc(searchString); 
       }, 500);
 
 
 
-      // отрисовка списка ссылок с фильмами под полем поиска:
+      // отрисовка списка ссылок  фильмов под полем поиска:
       const renderFunc = (filteredFilms) => {
             wrapper.innerHTML = '';         // очищаем перед заполнением 
           
@@ -34,7 +38,7 @@ const modal = () => {
       };
 
 
-
+      // поиск по фильмам:
       const searchFunc = (searchStr) => {
 
             fetch('https://anime-d6a5d-default-rtdb.firebaseio.com/db.json')
